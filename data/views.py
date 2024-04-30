@@ -3,6 +3,7 @@ from django.views.generic import DetailView
 from django.http import HttpResponse
 
 from .models import DivarData
+import json
 
 class GetData(DetailView):
     def get(self, request):
@@ -26,5 +27,21 @@ class GetData(DetailView):
         else:
             return HttpResponse("None Data")
 
+        return data
     
-        return HttpResponse("amir")
+data = {}
+def get_all(request):
+    try:
+        a = DivarData.objects.all()
+        print(a)
+        for i in a:
+            print(i.title)
+            if i.rent != "" and i.deposit != "":
+                data[i.pk] = {"title":i.title, "description":i.description, "category":i.category, "deposit":i.deposit, "rent":i.rent}
+            else:
+                data[i.pk] = {"title":i.title, "description":i.description, "category":i.category, "price":i.price}
+        return HttpResponse(data.values())
+    except:
+        return HttpResponse("invalid")
+
+
