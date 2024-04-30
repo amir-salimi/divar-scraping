@@ -2,4 +2,4 @@
 
 2- You need to run the "sudo docker-compose up --build" command
 
-3- To get data from the wall site and send them to your site, you must run the "python scraping.py" command
+3- To get data from the divar site and send them to your site, you must run the "python scraping.py" command
